@@ -7,15 +7,24 @@
     --grey-100:hsl(214, 17%, 92%);
     --grey-200:hsl(0, 0%, 81%);
     --grey-400:hsl(224, 10%, 45%);
-    --grey-500:hsl(217, 19%, 35);
-    --dark-blue:hsl(219, 29%, 14%);
+    --grey-500:hsl(217, 19%, 35%);
     --weird-blue:hsl(228, 45%, 44%);
+    --dark-blue:rgba(25, 33, 46, 1);
+
 
 }
 
 @font-face {
     font-family: Barlow;
     src: url('https://fonts.google.com/specimen/Barlow+Semi+Condensed');
+}
+
+html {
+    --name-color:var(var(--grey-100));
+    --status-color:var(var(--grey-100));
+    --name-mar:2px;
+    --alt-name-color:var(var(--grey-500));
+    --alt-status-color:var(var(--grey-500));
 }
 
 * {
@@ -29,7 +38,7 @@ body {
     justify-content: center;
     align-items: center;
      min-height: 100vh;
-     background-color: darkolivegreen;
+     background-color: wheat;
 }
 
 .box {
@@ -37,15 +46,16 @@ body {
     border-radius: 15px;
     padding: 10px;
     margin:5px;
+    box-shadow:10px 10px 10px 10px var(--grey-400) ;
 }
 
 .box h1 {
-    color:violet;
+    color:var(--grey-200);
     font-weight:bolder;
 }
 
 .test {
-    display: grid;
+  display: grid;
   grid-template-columns:1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr ;
   gap:15px;
@@ -77,33 +87,47 @@ img {
 
 
 .name {
-    color: var(--dark-blue);
     margin-block-end: 2px;
-}
+} 
 
 .status {
-    color:var(--grey-500);
+    /* color:var(--grey-500); */
     margin-block-start: 1px;
+} 
+
+.box-1, .box-2, .box-4 {
+    color: var(--white);
 }
 
 
 
+.box-1 .name, .box-2 .name, .box-4 .name {
+    color:var(--grey-100);
+}
+
+.box-1 .status, .box-2 .status, .box-4 .status {
+    color:var(--grey-100);
+}
+
+
+.box-3 .name, .box-3 .status, .box-5 .name, .box-5 .status, .box-3 p, .box-5 p {
+    color:var(--dark-blue);
+}
 
 
 .box-1 {
     grid-column-start: span 2 ;
     grid-row-start: span 1;
     background-color: var(--purple-500);
-    color:var(--white);
     background-image: url('./images/bg-pattern-quotation.svg');
     background-repeat: no-repeat;
    background-position:80% 0%;
 }
 
+
 .box-2 {
     grid-column-start:3;
-    background-color: var(--grey-400);
-    color:var(--white);
+    background-color:var(--grey-400) ;
 }
 
 .box-3 {
@@ -113,17 +137,20 @@ img {
     color: var(--weird-blue)
 }
 
+
+
 .box-4 {
     grid-column:1/2;
     grid-row:2/3;
-    background-color:var(--white);
+    background-color:var(--dark-blue);
 }
+
 
 .box-5 {
     grid-column: 2/4;
     grid-row:2/3;
-    background-color: var(--black);
-    color:var(--grey-200);
+    background-color: var(--white);
+    color:var(--grey-500);
 }
 
 
@@ -141,11 +168,40 @@ img {
       }
 
 
-@media screen and (width <= 375px ) { 
+@media screen and (width <= 375px ) {
     .test {
-        /* background-color: rebeccapurple; */
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        background-color: transparent;
     }
-};
+
+    .box-1, .box-2, .box-3, .box-4, .box-5 {
+    grid-column: auto;
+    grid-row: auto;
+    /* border: 5px solid green; */
+}
+
+}
+    
+
+@media (width >= 1024px){
+    .test {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas: 
+        "one one two five"
+        "three four four five";
+    }
+
+    .box-1 {
+        grid-area: one;
+    }
+
+    .box-2 {grid-area: two;}
+    .box-3 {grid-area: three;}
+    .box-4 {grid-area: four ;}
+    .box-5 {grid-area: five;}
+}
+
     
